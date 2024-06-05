@@ -1,4 +1,6 @@
+using apdb9.DTOs;
 using apdb9.Services;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace apdb9.Controllers;
@@ -8,47 +10,40 @@ namespace apdb9.Controllers;
 public class ClinicController : ControllerBase
 {
 
-    private readonly IClinicService _clinicService;
+    private readonly IClinicService service;
 
     public ClinicController(IClinicService clinicService)
     {
-        _clinicService = clinicService;
+        service = clinicService;
     }
 
-    // private readonly IClinicService _clinicService;
+    [HttpGet]
+    public async Task<IActionResult> GetDoctorAsync([FromRoute]int id)
+    {
+    return Ok(await service.GetDoctorAsync(id));
+    }
 
-    // public ClinicController(IClinicService clinicService)
-    // {
-    // _clinicService = clinicService;
-    // }
+    [HttpDelete]
+    public async Task<IActionResult> DeleteDoctorAsync()
+    {
+        return Ok(await service.DeleteDoctorAsync());
+    }
 
-    // [HttpGet]
-    // public Task<IActionResult> GetDoctorAsync()
-    // {
-    // return Ok(await "");
-    // }
+    [HttpPut]
+    public async Task<IActionResult> ModifyDoctorAsync()
+    {
+        return Ok(await service.ModifyDoctorAsync());
+    }
 
-    // [HttpDelete]
-    // public Task<IActionResult> DeleteDoctorAsync()
-    // {
+    [HttpPost]
+    public async Task<IActionResult> AddDoctorAsync([FromBody] DoctorDto dto)
+    {
+        return Ok(await service.AddDoctorAsync(dto));
+    }
 
-    // }
-
-    // [HttpPut]
-    // public Task<IActionResult> ModifyDoctorAsync()
-    // {
-
-    // }
-
-    // [HttpPost]
-    // public Task<IActionResult> AddDoctorAsync()
-    // {
-
-    // }
-
-    // [HttpGet("{id:int}")]
-    // public Task<IActionResult> GetPrescriptionAsync()
-    // {
-
-    // }
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetPrescriptionAsync(int id)
+    {
+        return Ok(service.GetPrescriptionAsync(id));
+    }
 }

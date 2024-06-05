@@ -10,6 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IClinicService, ClinicService>();
+builder.Services.AddScoped<IClinicRepository, ClinicRepository>();
+
 builder.Services.AddDbContext<ClinicContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection"));
