@@ -23,16 +23,16 @@ public class ClinicController : ControllerBase
     return Ok(await service.GetDoctorAsync(id));
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeleteDoctorAsync()
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteDoctorAsync(int id)
     {
-        return Ok(await service.DeleteDoctorAsync());
+        return Ok(await service.DeleteDoctorAsync(id));
     }
 
     [HttpPut]
-    public async Task<IActionResult> ModifyDoctorAsync()
+    public async Task<IActionResult> ModifyDoctorAsync(int id, DoctorModifiedDto dto)
     {
-        return Ok(await service.ModifyDoctorAsync());
+        return Ok(await service.ModifyDoctorAsync(id, dto));
     }
 
     [HttpPost]
@@ -44,6 +44,6 @@ public class ClinicController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetPrescriptionAsync(int id)
     {
-        return Ok(service.GetPrescriptionAsync(id));
+        return Ok(await service.GetPrescriptionAsync(id));
     }
 }

@@ -7,8 +7,8 @@ namespace apdb9.Services;
 public interface IClinicService
 {
     public Task<Doctor> GetDoctorAsync(int id);
-    public Task<bool> DeleteDoctorAsync();
-    public Task<bool> ModifyDoctorAsync();
+    public Task<bool> DeleteDoctorAsync(int id);
+    public Task<Doctor> ModifyDoctorAsync(int id, DoctorModifiedDto dto);
     public Task<bool> AddDoctorAsync(DoctorDto dto);
 
     public Task<PrescriptionDto> GetPrescriptionAsync(int id);
@@ -30,14 +30,14 @@ public class ClinicService : IClinicService
         return await _repository.GetDoctorAsync(id);
     }
 
-    public async Task<bool> DeleteDoctorAsync()
+    public async Task<bool> DeleteDoctorAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _repository.DeleteDoctorAsync(id);
     }
 
-    public async Task<bool> ModifyDoctorAsync()
+    public async Task<Doctor> ModifyDoctorAsync(int id, DoctorModifiedDto dto)
     {
-        throw new NotImplementedException();
+        return await _repository.ModifyDoctorAsync(id, dto);
     }
 
     public async Task<bool> AddDoctorAsync(DoctorDto dto)
@@ -47,6 +47,6 @@ public class ClinicService : IClinicService
 
     public async Task<PrescriptionDto> GetPrescriptionAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _repository.GetPrescriptionAsync(id);
     }
 }
