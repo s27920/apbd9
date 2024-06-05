@@ -28,6 +28,7 @@ public class ClinicRepository : IClinicRepository
 
     public async Task<Doctor> GetDoctorAsync(int id)
     {
+        Seed(_context);
         return await _context.Doctors.FirstAsync(doctor => doctor.IdDoctor == id);
     }
 
@@ -40,7 +41,7 @@ public class ClinicRepository : IClinicRepository
         _context.Attach(toDelete);
         var entry = _context.Entry(toDelete);
         entry.State = EntityState.Deleted;
-        return await _context.SaveChangesAsync()>1;
+        return await _context.SaveChangesAsync() > 0;
     }
 
     public async Task<Doctor> ModifyDoctorAsync(int id, DoctorModifiedDto dto)
